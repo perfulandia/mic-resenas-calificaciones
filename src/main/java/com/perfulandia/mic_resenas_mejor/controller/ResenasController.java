@@ -16,6 +16,7 @@ import com.perfulandia.mic_resenas_mejor.service.ResenasService;
 
 /*revisado */
 
+/* listo */
 @RestController
 @RequestMapping("/api/v1/resenas")
 public class ResenasController {
