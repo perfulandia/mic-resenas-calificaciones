@@ -24,7 +24,13 @@ public class Resenas {
 
     @Column(nullable = false)
     private Double calificacion;
+
+    @Column(nullable = false)
+    private String id_producto;
     
+    @Column(nullable = false)
+    private String id_usuario;
+
     @Column(length = 100, nullable = false)
     private String comentario;
 }
