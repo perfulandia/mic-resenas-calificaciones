@@ -52,22 +52,26 @@ public class ResenasController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Resenas> updateResena(
-        @PathVariable Long id,
-        @RequestBody Resenas resenaDetails
-    ) {
-        return resenaService.findById(id)
-            .map(resenaExistente -> {
-                // Actualizar campos necesarios
+public ResponseEntity<Resenas> updateResena(
+    @PathVariable Long id,
+    @RequestBody Resenas resenaDetails
+) {
+    return resenaService.findById(id)
+        .map(resenaExistente -> {
+            // Actualizar solo campos modificables
+            if(resenaDetails.getComentario() != null) {
                 resenaExistente.setComentario(resenaDetails.getComentario());
+            }
+            if(resenaDetails.getCalificacion() != null) {
                 resenaExistente.setCalificacion(resenaDetails.getCalificacion());
-                // Agrega más campos si tu entidad los tiene
-                
-                Resenas resenaActualizada = resenaService.save(resenaExistente);
-                return new ResponseEntity<>(resenaActualizada, HttpStatus.OK);
-            })
-            .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
-    }
+            }
+            // NO actualizar id_producto ni id_usuario por seguridad
+            
+            Resenas resenaActualizada = resenaService.save(resenaExistente);
+            return new ResponseEntity<>(resenaActualizada, HttpStatus.OK);
+        })
+        .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+}
 }
 
 
