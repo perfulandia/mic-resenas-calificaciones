@@ -26,7 +26,7 @@ public class Resenas {
     private Double calificacion;
 
     @Column(nullable = false)
-    private String id_producto;
+    private Long id_producto;
     
     @Column(nullable = false)
     private String id_usuario;
